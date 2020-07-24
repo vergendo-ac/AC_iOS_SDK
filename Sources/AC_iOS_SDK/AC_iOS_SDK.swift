@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import AC_iOS_NET!!!!!!!!!!!
 
 struct AC_iOS_SDK {
     var text = "Hello, World!"
@@ -17,7 +18,7 @@ open class SDK {
     }
     
     open class Localization {
-        public static func checkNearPlaceholders() {
+        public static func prepare() {
             print("checkNearPlaceholders")
         }
 

@@ -15,15 +15,14 @@ let package = Package(
             targets: ["AC_iOS_SDK"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(name:"AC_iOS_NET", url: "https://bitbucket.org/relative_localization/ac_ios_net.git", from: "1.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "AC_iOS_SDK",
-            dependencies: []),
+            dependencies: ["AC_iOS_NET"]),
         .testTarget(
             name: "AC_iOS_SDKTests",
             dependencies: ["AC_iOS_SDK"]),
