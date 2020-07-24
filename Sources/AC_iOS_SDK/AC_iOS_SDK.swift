@@ -17,11 +17,11 @@ open class SDK {
     }
     
     open class Localization {
-        public static func prepare(location: CLLocation) {
+        public static func prepare(location: CLLocation, completion: ((String) -> Void)? = nil) {
             NET.Localizer.prepare(for: location) { (prepareResponse, urlResponse, error) in
-                guard error == nil else { print(error!.localizedDescription); return }
-                guard let response = prepareResponse else { print("No prepare response"); return }
-                print(response)
+                guard error == nil else { completion?(error!.localizedDescription); return }
+                guard let response = prepareResponse else { completion?("No prepare response"); return }
+                completion?("\(response)")
             }
         }
 
