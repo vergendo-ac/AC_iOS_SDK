@@ -1,6 +1,6 @@
 import Foundation
 import CoreLocation
-import AC_iOS_NET!!!!!!!!!!!
+import AC_iOS_NET
 
 struct AC_iOS_SDK {
     var text = "Hello, World!"
@@ -12,14 +12,17 @@ open class SDK {
     open class Common {
         public static func info() {
             let sdk = AC_iOS_SDK()
-            
             print("AC_iOS_SDK, text = \(sdk.text), version = \(sdk.version)")
         }
     }
     
     open class Localization {
-        public static func prepare() {
-            print("checkNearPlaceholders")
+        public static func prepare(location: CLLocation) {
+            NET.Localizer.prepare(for: location) { (prepareResponse, urlResponse, error) in
+                guard error == nil else { print(error!.localizedDescription); return }
+                guard let response = prepareResponse else { print("No prepare response"); return }
+                print(response)
+            }
         }
 
         public static func checkNearCity() {
