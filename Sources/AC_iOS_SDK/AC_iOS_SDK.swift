@@ -6,7 +6,7 @@ struct AC_iOS_SDK {
     var version = "1.0.1"
 }
 
-class AugmentedCity {
+class SDK {
     
     class Common {
         static func info() {
