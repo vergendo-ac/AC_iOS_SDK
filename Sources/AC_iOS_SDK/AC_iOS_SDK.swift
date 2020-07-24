@@ -20,8 +20,8 @@ open class SDK {
         public static func prepare(location: CLLocation, completion: ((String) -> Void)? = nil) {
             NET.Localizer.prepare(for: location) { (prepareResponse, urlResponse, error) in
                 guard error == nil else { completion?(error!.localizedDescription); return }
-                guard let response = prepareResponse else { completion?("No prepare response"); return }
-                completion?("\(response)")
+                guard let response = prepareResponse else { completion?("No response"); return }
+                completion?(response.status.message)
             }
         }
 
