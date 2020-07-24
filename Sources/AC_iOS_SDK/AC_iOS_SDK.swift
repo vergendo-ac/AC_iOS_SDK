@@ -9,7 +9,7 @@ struct AC_iOS_SDK {
 open class SDK {
     
     open class Common {
-        static func info() {
+        open static func info() {
             let sdk = AC_iOS_SDK()
             
             print("AC_iOS_SDK, text = \(sdk.text), version = \(sdk.version)")
@@ -17,7 +17,7 @@ open class SDK {
     }
     
     open class Localization {
-        static func checkNearPlaceholders() {
+        open static func checkNearPlaceholders() {
             print("checkNearPlaceholders")
         }
 
@@ -28,7 +28,7 @@ open class SDK {
     
     open class Objects {
         
-        static func addObject(type: String) {
+        open static func addObject(type: String) {
             print("Added object: \(type)")
         }
         
