@@ -17,18 +17,18 @@ open class SDK {
     }
     
     open class Localization {
-        public static func prepare(location: CLLocation, completion: ((String) -> Void)? = nil) {
+        public static func prepare(at serverAddress: String =  Servers.addresses[2], location: CLLocation, completion: ((String) -> Void)? = nil) {
             let request = LocalizationModel.Prepare.Request(location: location)
-            NET.Localizer.prepare(for: request) { (prepareResponse, urlResponse, error) in
+            NET.Localizer.prepare(at: serverAddress, for: request) { (prepareResponse, urlResponse, error) in
                 guard error == nil else { completion?(error!.localizedDescription); return }
                 guard let response = prepareResponse else { completion?("No response"); return }
                 completion?(response.status.message)
             }
         }
         
-        public static func localize(imageData: Data, completion: @escaping NET.Localizer.localizeCompletionHandler) {
+        public static func localize(at serverAddress: String = Servers.addresses[2], imageData: Data, completion: @escaping NET.Localizer.localizeCompletionHandler) {
             let request = LocalizationModel.Localize.Request(imageData: imageData)
-            NET.Localizer.localize(at: Servers.addresses[0], for: request, completion: completion)
+            NET.Localizer.localize(at: serverAddress, for: request, completion: completion)
         }
     }
     
