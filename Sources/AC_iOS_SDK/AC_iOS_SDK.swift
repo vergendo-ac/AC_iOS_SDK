@@ -18,15 +18,17 @@ open class SDK {
     
     open class Localization {
         public static func prepare(location: CLLocation, completion: ((String) -> Void)? = nil) {
-            NET.Localizer.prepare(for: location) { (prepareResponse, urlResponse, error) in
+            let request = LocalizationModel.Prepare.Request(location: location)
+            NET.Localizer.prepare(for: request) { (prepareResponse, urlResponse, error) in
                 guard error == nil else { completion?(error!.localizedDescription); return }
                 guard let response = prepareResponse else { completion?("No response"); return }
                 completion?(response.status.message)
             }
         }
-
-        public static func checkNearCity() {
-            print("checkNearCity")
+        
+        public static func localize(imageData: Data, completion: @escaping NET.Localizer.localizeCompletionHandler) {
+            let request = LocalizationModel.Localize.Request(imageData: imageData)
+            NET.Localizer.localize(at: Servers.addresses[0], for: request, completion: completion)
         }
     }
     
