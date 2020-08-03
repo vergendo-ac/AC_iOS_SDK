@@ -31,7 +31,11 @@ open class SDK {
             NET.Localizer.localize(at: serverAddress, for: request, completion: completion)
         }
 
-        public static func localizeMultipartData(at serverAddress: String = Servers.addresses[2], imageData: Data, jsonData: Data, completion: @escaping NET.Localizer.localizeMPDCompletionHandler) {
+        public static func localizeMultipartData(at serverAddress: String = Servers.addresses[2], imageData: Data, location: CLLocation, completion: @escaping NET.Localizer.localizeMPDCompletionHandler) {
+            let encoder = JSONEncoder()
+            let json = LocalizationModel.LocalizeJSONSettings(location: location)
+            guard let jsonData = try? encoder.encode(json) else { completion(nil, nil, nil); return }
+            
             let request = LocalizationModel.Localize.Request(imageData: [imageData], jsonData: jsonData)
             NET.Localizer.localizeMPD(at: serverAddress, for: request, completion: completion)
         }
