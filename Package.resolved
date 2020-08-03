@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AC_iOS_NET",
+        "repositoryURL": "https://bitbucket.org/relative_localization/ac_ios_net.git",
+        "state": {
+          "branch": null,
+          "revision": "3f45dfb5483d55003fcb0fae8ab2ebda2407a332",
+          "version": "1.0.23"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

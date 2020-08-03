@@ -27,9 +27,15 @@ open class SDK {
         }
         
         public static func localize(at serverAddress: String = Servers.addresses[2], imageData: Data, completion: @escaping NET.Localizer.localizeCompletionHandler) {
-            let request = LocalizationModel.Localize.Request(imageData: imageData)
+            let request = LocalizationModel.Localize.Request(imageData: [imageData])
             NET.Localizer.localize(at: serverAddress, for: request, completion: completion)
         }
+
+        public static func localizeMultipartData(at serverAddress: String = Servers.addresses[2], imageData: Data, jsonData: Data, completion: @escaping NET.Localizer.localizeMPDCompletionHandler) {
+            let request = LocalizationModel.Localize.Request(imageData: [imageData], jsonData: jsonData)
+            NET.Localizer.localizeMPD(at: serverAddress, for: request, completion: completion)
+        }
+
     }
     
     open class Objects {
