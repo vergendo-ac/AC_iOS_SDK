@@ -45,6 +45,7 @@ open class SDK {
     open class Objects {
         
         public typealias addObjectModel = NET.ObjectOperator.addObjectModel
+        public typealias stickerField = NET.ObjectOperator.stickerField
         public static func addObject(to serverAddress: String = Servers.addresses[2], imageData: Data, objectModel: addObjectModel, completion: @escaping NET.ObjectOperator.addObjectMPDCompletionHandler) {
             let encoder = JSONEncoder()
             guard let jsonData = try? encoder.encode(objectModel) else { completion(nil, nil, nil); return }
