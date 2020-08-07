@@ -44,7 +44,8 @@ open class SDK {
     
     open class Objects {
         
-        public static func addObject(to serverAddress: String = Servers.addresses[2], imageData: Data, objectModel: NET.ObjectOperator.addObjectModel, completion: @escaping NET.ObjectOperator.addObjectMPDCompletionHandler) {
+        public typealias addObjectModel = NET.ObjectOperator.addObjectModel
+        public static func addObject(to serverAddress: String = Servers.addresses[2], imageData: Data, objectModel: addObjectModel, completion: @escaping NET.ObjectOperator.addObjectMPDCompletionHandler) {
             let encoder = JSONEncoder()
             guard let jsonData = try? encoder.encode(objectModel) else { completion(nil, nil, nil); return }
             
