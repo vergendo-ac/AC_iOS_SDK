@@ -22,7 +22,7 @@ open class SDK {
             NET.Localizer.prepare(at: serverAddress, for: request) { (prepareResponse, urlResponse, error) in
                 guard error == nil else { completion?(error!.localizedDescription); return }
                 guard let response = prepareResponse else { completion?("No response"); return }
-                completion?(response.status.message)
+                completion?(response.status.message ?? "No message")
             }
         }
         
@@ -44,8 +44,12 @@ open class SDK {
     
     open class Objects {
         
-        public static func addObject(type: String) {
-            print("Added object: \(type)")
+        public static func addObject(to serverAddress: String = Servers.addresses[2], imageData: Data, objectModel: NET.ObjectOperator.addObjectModel, completion: @escaping NET.ObjectOperator.addObjectMPDCompletionHandler) {
+            let encoder = JSONEncoder()
+            guard let jsonData = try? encoder.encode(objectModel) else { completion(nil, nil, nil); return }
+            
+            let request = ObjectModel.AddObject.Request(imageData: imageData, jsonData: jsonData)
+            NET.ObjectOperator.addObjectMPD(to: serverAddress, for: request, completion: completion)
         }
         
     }
