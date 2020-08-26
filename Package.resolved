@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "AC_iOS_NET",
-        "repositoryURL": "https://bitbucket.org/relative_localization/ac_ios_net.git",
+        "repositoryURL": "https://lammax:987_,Bn,frTn_123@bitbucket.org/relative_localization/ac_ios_net.git",
         "state": {
           "branch": null,
-          "revision": "cd68d875fa7612cff48f34d429a787db61436b19",
-          "version": "1.0.33"
+          "revision": "1315780b412923e0d0a8bd1172213d96d43335bb",
+          "version": "1.0.34"
         }
       }
     ]

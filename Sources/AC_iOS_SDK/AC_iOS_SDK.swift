@@ -31,6 +31,7 @@ open class SDK {
             NET.Localizer.localize(at: serverAddress, for: request, completion: completion)
         }
 
+        public typealias localizeMPDResponse = NET.Localizer.localizeMPDResponse
         public static func localizeMultipartData(at serverAddress: String = Servers.addresses[2], imageData: Data, location: CLLocation, completion: @escaping NET.Localizer.localizeMPDCompletionHandler) {
             let encoder = JSONEncoder()
             let json = LocalizationModel.LocalizeJSONSettings(location: location)
