@@ -52,7 +52,7 @@ open class SDK {
             let encoder = JSONEncoder()
             guard let jsonData = try? encoder.encode(objectModel) else { completion(nil, nil, nil); return }
             
-            print(String(data: jsonData, encoding: .utf8))
+            print(String(data: jsonData, encoding: .utf8)!)
             
             let request = ObjectModel.AddObject.Request(imageData: imageData, jsonData: jsonData)
             NET.ObjectOperator.addObjectMPD(to: serverAddress, for: request, completion: completion)
