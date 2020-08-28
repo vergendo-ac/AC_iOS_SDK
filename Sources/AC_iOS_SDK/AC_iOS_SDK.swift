@@ -60,7 +60,7 @@ open class SDK {
                     altitude: Float(location.altitude),
                     hdop: Float(location.horizontalAccuracy)
                 ),
-                focalLengthIn35mmFilm: photoInfo["photoInfo"] as? Int, //Int?
+                focalLengthIn35mmFilm: photoInfo["focalLengthIn35mmFilm"] as? Int, //Int?
                 mirrored: photoInfo["mirrored"] as? Bool, //Bool?
                 rotation: rotation //ImageDescription.Rotation?
             )
