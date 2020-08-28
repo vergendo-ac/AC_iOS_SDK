@@ -40,6 +40,35 @@ open class SDK {
             let request = LocalizationModel.Localize.Request(imageData: [imageData], jsonData: jsonData)
             NET.Localizer.localizeMPD(at: serverAddress, for: request, completion: completion)
         }
+        
+        public typealias localizationResultSwagger = NET.Localizer.localizationResultSwagger
+        public static func localizeSwagger(server address: String = Servers.addresses[0], for image: Data, location: CLLocation, photoInfo: [String:Any] = [:], completion: @escaping ((_ data: localizationResultSwagger?,_ error: Error?) -> Void)) {
+            //TODO: add our server address
+            //make URL for image
+            guard let imageURL = FileUtils.writeFile(name: "iosImageForLocalization", data: image) else {
+                completion(nil, NSError(domain: "ac.ios.sdk.error", code: 1, userInfo: ["error": "no image url"]))
+                return
+            }
+            //make imageDescription
+            let rotationIndex: Int? = photoInfo["rotation"] as? Int
+            let rotation: ImageDescription.Rotation? = rotationIndex == nil ? nil : ImageDescription.Rotation(rawValue: rotationIndex!)
+            
+            let imageDescription = NET.Localizer.imageDescription(
+                gps: ImageDescriptionGps(
+                    latitude: Float(location.coordinate.latitude),
+                    longitude: Float(location.coordinate.longitude),
+                    altitude: Float(location.altitude),
+                    hdop: Float(location.horizontalAccuracy)
+                ),
+                focalLengthIn35mmFilm: photoInfo["photoInfo"] as? Int, //Int?
+                mirrored: photoInfo["mirrored"] as? Bool, //Bool?
+                rotation: rotation //ImageDescription.Rotation?
+            )
+            
+            NET.Localizer.localizeSwagger(server: address, for: imageURL, with: imageDescription) { (localizationSwaggerResult, error) in
+                completion(localizationSwaggerResult, error)
+            }
+        }
 
     }
     
