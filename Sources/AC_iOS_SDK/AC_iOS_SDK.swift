@@ -37,6 +37,8 @@ open class SDK {
             let json = LocalizationModel.LocalizeJSONSettings(location: location)
             guard let jsonData = try? encoder.encode(json) else { completion(nil, nil, nil); return }
             
+            print( String(data: jsonData, encoding: .utf8)! )
+            
             let request = LocalizationModel.Localize.Request(imageData: [imageData], jsonData: jsonData)
             NET.Localizer.localizeMPD(at: serverAddress, for: request, completion: completion)
         }
