@@ -15,7 +15,7 @@ let package = Package(
             targets: ["AC_iOS_SDK"]),
     ],
     dependencies: [
-        .package(name:"AC_iOS_NET", url: "https://lammax:987_,Bn,frTn_123@bitbucket.org/relative_localization/ac_ios_net.git", from: "1.0.48")
+        .package(name:"AC_iOS_NET", url: "https://lammax:987_,Bn,frTn_123@bitbucket.org/relative_localization/ac_ios_net.git", from: "1.0.49")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
