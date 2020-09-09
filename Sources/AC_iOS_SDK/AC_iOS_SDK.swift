@@ -55,13 +55,22 @@ open class SDK {
             let rotationIndex: Int? = photoInfo["rotation"] as? Int
             let rotation: ImageDescription.Rotation? = rotationIndex == nil ? nil : ImageDescription.Rotation(rawValue: rotationIndex!)
             
+            let imageDescriptionGps: ImageDescriptionGps = ImageDescriptionGps(
+                latitude: Float(location.coordinate.latitude),
+                longitude: Float(location.coordinate.longitude),
+                altitude: Float(location.altitude),
+                hdop: Float(location.horizontalAccuracy)
+            )
+            let cameraIntrinsics: CameraIntrinsics = CameraIntrinsics(
+                fx: photoInfo["fx"] as? Float ?? .zero,
+                fy: photoInfo["fy"] as? Float ?? .zero,
+                cx: photoInfo["cx"] as? Float ?? .zero,
+                cy: photoInfo["cy"] as? Float ?? .zero
+            )
+            
             let imageDescription = NET.Localizer.imageDescription(
-                gps: ImageDescriptionGps(
-                    latitude: Float(location.coordinate.latitude),
-                    longitude: Float(location.coordinate.longitude),
-                    altitude: Float(location.altitude),
-                    hdop: Float(location.horizontalAccuracy)
-                ),
+                gps: imageDescriptionGps,
+                intrinsics: cameraIntrinsics,
                 focalLengthIn35mmFilm: photoInfo["focalLengthIn35mmFilm"] as? Int, //Int?
                 mirrored: photoInfo["mirrored"] as? Bool, //Bool?
                 rotation: rotation //ImageDescription.Rotation?
