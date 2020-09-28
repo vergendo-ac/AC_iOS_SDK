@@ -2,12 +2,30 @@
   "object": {
     "pins": [
       {
+        "package": "AC_iOS_AR",
+        "repositoryURL": "https://github.com/vergendo-ac/AC_iOS_AR.git",
+        "state": {
+          "branch": null,
+          "revision": "068890499c5b82c9cac8ed94923bdaecd2a838c7",
+          "version": "1.0.1"
+        }
+      },
+      {
         "package": "AC_iOS_NET",
         "repositoryURL": "https://lammax:987_,Bn,frTn_123@bitbucket.org/relative_localization/ac_ios_net.git",
         "state": {
           "branch": null,
-          "revision": "ad2f870744c5f64845df2e3aba526fd36491f1c1",
-          "version": "1.0.51"
+          "revision": "3fcdc1acf0f8d418bc5f59d6c21719d3ee3f3308",
+          "version": "1.0.52"
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
+          "version": "4.3.0"
         }
       }
     ]
