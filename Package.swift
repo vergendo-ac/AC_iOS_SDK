@@ -15,8 +15,8 @@ let package = Package(
             targets: ["AC_iOS_SDK"]),
     ],
     dependencies: [
-        .package(name:"AC_iOS_AR", url: "https://d2e9a98ffbf51ab17ddacf49618a78f7faa4f2d6@github.com/vergendo-ac/AC_iOS_AR.git", from: "1.0.3"),
-        .package(name:"AC_iOS_NET", url: "https://d2e9a98ffbf51ab17ddacf49618a78f7faa4f2d6@github.com/vergendo-ac/AC_iOS_NET.git", from: "1.0.53")
+        .package(name:"AC_iOS_AR", url: "https://20e2ac490e89ceb2d1ed84043ad82762f831e9d6@github.com/vergendo-ac/AC_iOS_AR.git", from: "1.0.3"),
+        .package(name:"AC_iOS_NET", url: "https://20e2ac490e89ceb2d1ed84043ad82762f831e9d6@github.com/vergendo-ac/AC_iOS_NET.git", from: "1.0.53")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
