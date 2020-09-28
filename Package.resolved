@@ -6,17 +6,17 @@
         "repositoryURL": "https://github.com/vergendo-ac/AC_iOS_AR.git",
         "state": {
           "branch": null,
-          "revision": "068890499c5b82c9cac8ed94923bdaecd2a838c7",
-          "version": "1.0.1"
+          "revision": "afc890f26aaa9046172b8a3a48966c9fa9ab865e",
+          "version": "1.0.2"
         }
       },
       {
         "package": "AC_iOS_NET",
-        "repositoryURL": "https://lammax:987_,Bn,frTn_123@bitbucket.org/relative_localization/ac_ios_net.git",
+        "repositoryURL": "https://github.com/vergendo-ac/AC_iOS_NET.git",
         "state": {
           "branch": null,
-          "revision": "3fcdc1acf0f8d418bc5f59d6c21719d3ee3f3308",
-          "version": "1.0.52"
+          "revision": "caf598bad40d869945b758013199c6eb0325c9f1",
+          "version": "1.0.53"
         }
       },
       {
