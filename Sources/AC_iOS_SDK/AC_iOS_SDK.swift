@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import AC_iOS_NET
+//import AC_iOS_AR
 
 struct AC_iOS_SDK {
     var text = "Hello, World!"
@@ -54,13 +55,14 @@ open class SDK {
             //make imageDescription
             let rotationIndex: Int? = photoInfo["rotation"] as? Int
             let rotation: ImageDescription.Rotation? = rotationIndex == nil ? nil : ImageDescription.Rotation(rawValue: rotationIndex!)
-            
+
             let imageDescriptionGps: ImageDescriptionGps = ImageDescriptionGps(
                 latitude: Float(location.coordinate.latitude),
                 longitude: Float(location.coordinate.longitude),
                 altitude: Float(location.altitude),
                 hdop: Float(location.horizontalAccuracy)
             )
+            
             let cameraIntrinsics: CameraIntrinsics = CameraIntrinsics(
                 fx: photoInfo["fx"] as? Float ?? .zero,
                 fy: photoInfo["fy"] as? Float ?? .zero,
@@ -99,5 +101,9 @@ open class SDK {
         }
         
     }
+    
+    /*open class AR {
+        typealias ArControler = AR.ArControler
+    }*/
     
 }
