@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 import AC_iOS_NET
-//import AC_iOS_AR
+import UIKit
 
 struct AC_iOS_SDK {
     var text = "Hello, World!"
@@ -53,6 +53,7 @@ open class SDK {
                 return
             }
             //make imageDescription
+            
             let rotationIndex: Int? = photoInfo["rotation"] as? Int
             let rotation: ImageDescription.Rotation? = rotationIndex == nil ? nil : ImageDescription.Rotation(rawValue: rotationIndex!)
 
@@ -102,8 +103,28 @@ open class SDK {
         
     }
     
-    /*open class AR {
-        typealias ArControler = AR.ArControler
-    }*/
+    open class ARScene {
+        
+        public static func set(server address: String = Servers.addresses[0], arView backView: UIView) {
+            ARHelper.set(server: address, arView: backView)
+        }
+        
+        public static func start(completion: @escaping (Bool, Error?) -> Void) {
+            ARHelper.startAR()
+            ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo) in
+                guard let imageData = mImageData, let location = mLocation, let photoInfo = mPhotoInfo else { return }
+                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: location, photoInfo: photoInfo) { (mLocalizationResult, error) in
+                    guard error == nil else { completion(false, error); return }
+                    guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
+                    ARHelper.show(localizationResult: localizationResult)
+                    completion(true, nil)
+                }
+            }
+        }
+
+        public static func stop() {
+            ARHelper.stopAR()
+        }
+    }
     
 }
