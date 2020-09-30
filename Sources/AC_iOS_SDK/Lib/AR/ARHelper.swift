@@ -8,14 +8,13 @@
 import UIKit
 import AC_iOS_AR
 import CoreLocation.CLLocation
-import AC_iOS_NET
 
 open class ARHelper {
     
     public static var serverAddress: String = ""
     
     //MARK: Localization
-    public class func getDataForLocalization(completion: @escaping (_ imageData: Data?, _ location: CLLocation?, _ photoInfo: [String:Any]?) -> Void) {
+    public class func getDataForLocalization(completion: @escaping (_ imageData: Data?, _ location: CLLocation?, _ photoInfo: [String:Any]?, _ pose: Pose?) -> Void) {
         AR.Localization.getData(completion: completion)
     }
 
@@ -28,7 +27,7 @@ open class ARHelper {
         AR.Session.stopAR()
     }
     
-    public class func show(localizationResult: NET.Localizer.localizationResultSwagger) {
+    public class func show(localizationResult: SDK.Localization.localizationResultSwagger) {
         guard let data = try? JSONEncoder().encode(localizationResult) else { return }
         AR.Session.show(localizationData: data)
     }

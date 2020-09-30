@@ -2,6 +2,7 @@ import Foundation
 import CoreLocation
 import AC_iOS_NET
 import UIKit
+import AC_iOS_AR
 
 struct AC_iOS_SDK {
     var text = "Hello, World!"
@@ -55,16 +56,16 @@ open class SDK {
             //make imageDescription
             
             let rotationIndex: Int? = photoInfo["rotation"] as? Int
-            let rotation: ImageDescription.Rotation? = rotationIndex == nil ? nil : ImageDescription.Rotation(rawValue: rotationIndex!)
+            let rotation: AC_iOS_NET.ImageDescription.Rotation? = rotationIndex == nil ? nil : AC_iOS_NET.ImageDescription.Rotation(rawValue: rotationIndex!)
 
-            let imageDescriptionGps: ImageDescriptionGps = ImageDescriptionGps(
+            let imageDescriptionGps: AC_iOS_NET.ImageDescriptionGps = AC_iOS_NET.ImageDescriptionGps(
                 latitude: Float(location.coordinate.latitude),
                 longitude: Float(location.coordinate.longitude),
                 altitude: Float(location.altitude),
                 hdop: Float(location.horizontalAccuracy)
             )
             
-            let cameraIntrinsics: CameraIntrinsics = CameraIntrinsics(
+            let cameraIntrinsics: AC_iOS_NET.CameraIntrinsics = AC_iOS_NET.CameraIntrinsics(
                 fx: photoInfo["fx"] as? Float ?? .zero,
                 fy: photoInfo["fy"] as? Float ?? .zero,
                 cx: photoInfo["cx"] as? Float ?? .zero,
@@ -101,7 +102,7 @@ open class SDK {
             NET.ObjectOperator.addObjectMPD(to: serverAddress, for: request, completion: completion)
         }
         
-        public typealias objectWithPose = ObjectWithPose
+        public typealias objectWithPose = AC_iOS_NET.ObjectWithPose
         public static func addObjectWithPose(server address: String = Servers.addresses[0], objectWithPose: SDK.Objects.objectWithPose, apiResponseQueue: DispatchQueue = .main, completion: @escaping NET.ObjectOperator.addObjectWithPoseCompletionHandler ) {
             NET.ObjectOperator.addObjectWithPose(server: address, objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
         }
@@ -110,11 +111,11 @@ open class SDK {
     
     open class ARScene {
         
-        public static func getLocalizationResult(location: CLLocation? = nil, completion: @escaping (Data?, SDK.Localization.localizationResultSwagger?, Error?) -> Void) {
-            ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo) in
-                guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo else { completion(nil, nil, nil); return }
+        public static func getLocalizationResult(location: CLLocation? = nil, completion: @escaping (Data?, SDK.Localization.localizationResultSwagger?, Error?, AC_iOS_AR.Pose?) -> Void) {
+            ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo, mPose) in
+                guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo, let pose = mPose else { completion(nil, nil, nil, nil); return }
                 SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationresult, mError) in
-                    completion(imageData, mLocalizationresult, mError)
+                    completion(imageData, mLocalizationresult, mError, pose)
                 }
             }
         }
@@ -128,7 +129,7 @@ open class SDK {
         }
         
         public static func show(location: CLLocation? = nil, completion: @escaping (Bool, Error?) -> Void) {
-            SDK.ARScene.getLocalizationResult(location: location) { (_, mLocalizationResult, error) in
+            SDK.ARScene.getLocalizationResult(location: location) { (_, mLocalizationResult, error, _) in
                 guard error == nil else { completion(false, error); return }
                 guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
                 ARHelper.show(localizationResult: localizationResult)
