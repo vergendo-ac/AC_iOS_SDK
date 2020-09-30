@@ -105,6 +105,13 @@ open class SDK {
     
     open class ARScene {
         
+        public static func getLocalizationResult(location: CLLocation? = nil, completion: @escaping (SDK.Localization.localizationResultSwagger?, Error?) -> Void) {
+            ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo) in
+                guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo else { completion(nil, nil); return }
+                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo, completion: completion)
+            }
+        }
+
         public static func setup(server address: String = Servers.addresses[0], arView backView: UIView) {
             ARHelper.set(server: address, arView: backView)
         }
@@ -114,14 +121,11 @@ open class SDK {
         }
         
         public static func show(location: CLLocation? = nil, completion: @escaping (Bool, Error?) -> Void) {
-            ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo) in
-                guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo else { completion(false, nil); return }
-                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationResult, error) in
-                    guard error == nil else { completion(false, error); return }
-                    guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
-                    ARHelper.show(localizationResult: localizationResult)
-                    completion(true, nil)
-                }
+            SDK.ARScene.getLocalizationResult(location: location) { (mLocalizationResult, error) in
+                guard error == nil else { completion(false, error); return }
+                guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
+                ARHelper.show(localizationResult: localizationResult)
+                completion(true, nil)
             }
         }
 
