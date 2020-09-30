@@ -111,11 +111,12 @@ open class SDK {
     
     open class ARScene {
         
-        public static func getLocalizationResult(location: CLLocation? = nil, completion: @escaping (Data?, SDK.Localization.localizationResultSwagger?, Error?, AC_iOS_AR.Pose?) -> Void) {
+        public typealias cameraPose = AC_iOS_AR.Pose
+        public static func getLocalizationResult(location: CLLocation? = nil, completion: @escaping (Data?, SDK.Localization.localizationResultSwagger?, Error?, cameraPose?) -> Void) {
             ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo, mPose) in
                 guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo, let pose = mPose else { completion(nil, nil, nil, nil); return }
-                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationresult, mError) in
-                    completion(imageData, mLocalizationresult, mError, pose)
+                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationResult, mError) in
+                    completion(imageData, mLocalizationResult, mError, pose)
                 }
             }
         }
