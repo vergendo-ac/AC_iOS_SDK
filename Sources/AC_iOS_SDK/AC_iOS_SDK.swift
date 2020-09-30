@@ -113,10 +113,10 @@ open class SDK {
             ARHelper.startAR()
         }
         
-        public static func show(completion: @escaping (Bool, Error?) -> Void) {
+        public static func show(location: CLLocation? = nil, completion: @escaping (Bool, Error?) -> Void) {
             ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo) in
-                guard let imageData = mImageData, let location = mLocation, let photoInfo = mPhotoInfo else { return }
-                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: location, photoInfo: photoInfo) { (mLocalizationResult, error) in
+                guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo else { completion(false, nil); return }
+                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationResult, error) in
                     guard error == nil else { completion(false, error); return }
                     guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
                     ARHelper.show(localizationResult: localizationResult)
