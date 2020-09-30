@@ -101,7 +101,8 @@ open class SDK {
             NET.ObjectOperator.addObjectMPD(to: serverAddress, for: request, completion: completion)
         }
         
-        public static func addObjectWithPose(server address: String = Servers.addresses[0], objectWithPose: ObjectWithPose, apiResponseQueue: DispatchQueue = .main, completion: @escaping NET.ObjectOperator.addObjectWithPoseCompletionHandler ) {
+        public typealias objectWithPose = ObjectWithPose
+        public static func addObjectWithPose(server address: String = Servers.addresses[0], objectWithPose: SDK.Objects.objectWithPose, apiResponseQueue: DispatchQueue = .main, completion: @escaping NET.ObjectOperator.addObjectWithPoseCompletionHandler ) {
             NET.ObjectOperator.addObjectWithPose(server: address, objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
