@@ -105,7 +105,7 @@ open class SDK {
     
     open class ARScene {
         
-        public static func set(server address: String = Servers.addresses[0], arView backView: UIView) {
+        public static func setup(server address: String = Servers.addresses[0], arView backView: UIView) {
             ARHelper.set(server: address, arView: backView)
         }
         
