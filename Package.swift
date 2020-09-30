@@ -15,7 +15,7 @@ let package = Package(
             targets: ["AC_iOS_SDK"]),
     ],
     dependencies: [
-        .package(name:"AC_iOS_AR", url: "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_AR.git", from: "1.0.9"),
+        .package(name:"AC_iOS_AR", url: "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_AR.git", from: "1.0.10"),
         .package(name:"AC_iOS_NET", url: "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_NET.git", from: "1.0.53")
     ],
     targets: [
