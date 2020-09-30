@@ -105,10 +105,12 @@ open class SDK {
     
     open class ARScene {
         
-        public static func getLocalizationResult(location: CLLocation? = nil, completion: @escaping (SDK.Localization.localizationResultSwagger?, Error?) -> Void) {
+        public static func getLocalizationResult(location: CLLocation? = nil, completion: @escaping (Data?, SDK.Localization.localizationResultSwagger?, Error?) -> Void) {
             ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo) in
-                guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo else { completion(nil, nil); return }
-                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo, completion: completion)
+                guard let imageData = mImageData, let currentLocation = mLocation ?? location, let photoInfo = mPhotoInfo else { completion(nil, nil, nil); return }
+                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationresult, mError) in
+                    completion(imageData, mLocalizationresult, mError)
+                }
             }
         }
 
@@ -121,7 +123,7 @@ open class SDK {
         }
         
         public static func show(location: CLLocation? = nil, completion: @escaping (Bool, Error?) -> Void) {
-            SDK.ARScene.getLocalizationResult(location: location) { (mLocalizationResult, error) in
+            SDK.ARScene.getLocalizationResult(location: location) { (_, mLocalizationResult, error) in
                 guard error == nil else { completion(false, error); return }
                 guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
                 ARHelper.show(localizationResult: localizationResult)
