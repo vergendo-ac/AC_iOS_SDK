@@ -109,8 +109,11 @@ open class SDK {
             ARHelper.set(server: address, arView: backView)
         }
         
-        public static func start(completion: @escaping (Bool, Error?) -> Void) {
+        public static func start() {
             ARHelper.startAR()
+        }
+        
+        public static func show(completion: @escaping (Bool, Error?) -> Void) {
             ARHelper.getDataForLocalization { (mImageData, mLocation, mPhotoInfo) in
                 guard let imageData = mImageData, let location = mLocation, let photoInfo = mPhotoInfo else { return }
                 SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: location, photoInfo: photoInfo) { (mLocalizationResult, error) in
