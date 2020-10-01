@@ -17,6 +17,7 @@
 		048FE62F2525F10A00DAD4D4 /* ARScreenIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62C2525F10A00DAD4D4 /* ARScreenIntent.swift */; };
 		048FE6302525F10A00DAD4D4 /* ARScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62D2525F10A00DAD4D4 /* ARScreenView.swift */; };
 		048FE6312525F10A00DAD4D4 /* ARScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62E2525F10A00DAD4D4 /* ARScreenModel.swift */; };
+		048FE63D2525F90B00DAD4D4 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 048FE63C2525F90B00DAD4D4 /* art.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		048FE62C2525F10A00DAD4D4 /* ARScreenIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARScreenIntent.swift; sourceTree = "<group>"; };
 		048FE62D2525F10A00DAD4D4 /* ARScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARScreenView.swift; sourceTree = "<group>"; };
 		048FE62E2525F10A00DAD4D4 /* ARScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARScreenModel.swift; sourceTree = "<group>"; };
+		048FE63C2525F90B00DAD4D4 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +68,9 @@
 		048FE6072525EA8F00DAD4D4 /* AC_demo */ = {
 			isa = PBXGroup;
 			children = (
+				048FE6402525F98100DAD4D4 /* Resouces */,
 				048FE62A2525F0E900DAD4D4 /* Screens */,
 				048FE6082525EA8F00DAD4D4 /* AC_demoApp.swift */,
-				048FE60C2525EA9100DAD4D4 /* Assets.xcassets */,
 				048FE6112525EA9100DAD4D4 /* Info.plist */,
 				048FE60E2525EA9100DAD4D4 /* Preview Content */,
 			);
@@ -124,6 +126,15 @@
 				048FE62E2525F10A00DAD4D4 /* ARScreenModel.swift */,
 			);
 			path = ARScreen;
+			sourceTree = "<group>";
+		};
+		048FE6402525F98100DAD4D4 /* Resouces */ = {
+			isa = PBXGroup;
+			children = (
+				048FE60C2525EA9100DAD4D4 /* Assets.xcassets */,
+				048FE63C2525F90B00DAD4D4 /* art.scnassets */,
+			);
+			path = Resouces;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				048FE6102525EA9100DAD4D4 /* Preview Assets.xcassets in Resources */,
+				048FE63D2525F90B00DAD4D4 /* art.scnassets in Resources */,
 				048FE60D2525EA9100DAD4D4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,7 +415,7 @@
 			repositoryURL = "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_SDK.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.7;
+				minimumVersion = 2.0.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
