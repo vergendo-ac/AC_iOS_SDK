@@ -19,7 +19,8 @@ With this project you could just only see AC AR objects
 2. Approve permissions
 3. Camera should run from start
 4. Point camera to the surface with AC AR objects
-5. Tap "Show AR" button
+5. Tap "Show AR" button & hold phone for a couple of seconds, try not to move
+6. Enjoy! =)
 
 ## Supported Environments
 iOS version >= 13.0 & Swift 5 are recommended.
