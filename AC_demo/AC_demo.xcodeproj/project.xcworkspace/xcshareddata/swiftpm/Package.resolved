@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AC_iOS_AR",
+        "repositoryURL": "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_AR.git",
+        "state": {
+          "branch": null,
+          "revision": "c970d85f6ffe881c4fcc26e7908d510bb196d3fb",
+          "version": "2.0.3"
+        }
+      },
+      {
+        "package": "AC_iOS_NET",
+        "repositoryURL": "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_NET.git",
+        "state": {
+          "branch": null,
+          "revision": "a5e4e2ebf2e9b13a4f391baf869555c5e04e5b7a",
+          "version": "2.0.4"
+        }
+      },
+      {
+        "package": "AC_iOS_SDK",
+        "repositoryURL": "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_SDK.git",
+        "state": {
+          "branch": null,
+          "revision": "72cc3b59d38eec1afa130b400ba37d734cb23454",
+          "version": "2.0.6"
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
+          "version": "4.3.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

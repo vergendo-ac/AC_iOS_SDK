@@ -1,33 +1,26 @@
-# README #
+# Augmented City Demo
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Demo
+![Demo image](doc/demo.gif?raw=true "Demo app")
 
-### What is this repository for? ###
+## Introduction
+[Augmented City API](https://developer.augmented.city/doc)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Prerequisites
+1. Scan your location using ACS app
+2. Add sticker using ACO app (by pressing round gradient button)
+3. View your sticker(-s) with ACT or ACO app
 
-### How do I get set up? ###
+## Getting Started
+1. Prepare your location using steps above
+2. Run the app on your iOS device.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Supported Environments
+iOS version >= 13.0 & Swift 5 are recommended.
 
-### Contribution guidelines ###
+## Demo Project
+The Augmented City demo app demonstrates how to use AC api.
+[Augmented City API](/AC_demo)
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
-
-# AC_iOS_SDK
-
-A description of this package.
+## License
+TBD

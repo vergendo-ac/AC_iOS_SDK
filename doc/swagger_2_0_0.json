@@ -1,0 +1,1372 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "2.0.0",
+    "description": "## Description\nThis is an API for the Augmented City platform\n## Other resources\nFor more information, please visit our website [https://www.augmented.city](https://www.augmented.city/)\n",
+    "title": "Augmented City API",
+    "contact": {
+      "email": "support@vergendo.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "x-logo": {
+      "url": "https://images.squarespace-cdn.com/content/5dc18d1bdf3c7b576d0cac36/1586162865428-6BI8EJ4F9OHRED1GWAHA/Logo+AC+1.png?content-type=image%2Fpng",
+      "altText": "AugmentedCity"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://developer.augmented.city/api/v2",
+      "description": "AC Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Reconstruction",
+      "x-displayName": "Reconstruction"
+    },
+    {
+      "name": "Objects",
+      "description": "Operations with objects",
+      "x-displayName": "Objects"
+    },
+    {
+      "name": "Localizer",
+      "description": "Localization and scene acquisition",
+      "x-displayName": "Localization and scene acquisition"
+    },
+    {
+      "name": "Version",
+      "description": "Get server version",
+      "x-displayName": "Version"
+    }
+  ],
+  "paths": {
+    "/get_cities_all": {
+      "servers": [
+        {
+          "url": "https://developer.augmented.city/rpc"
+        }
+      ],
+      "get": {
+        "summary": "Get augmented cities list",
+        "operationId": "getAllCities",
+        "tags": [
+          "Reconstruction"
+        ],
+        "description": "Get the list of augmented cities. Localization is possible only inside scanned and reconstructed areas. Information about reconstructed areas will be provided in the future.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AugmentedCities"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_city": {
+      "servers": [
+        {
+          "url": "https://developer.augmented.city/rpc"
+        }
+      ],
+      "get": {
+        "summary": "Get augmented city by gps",
+        "operationId": "getCityByGps",
+        "tags": [
+          "Reconstruction"
+        ],
+        "description": "Get augmented city by gps point",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "p_latitude",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "GPS latitude"
+          },
+          {
+            "in": "query",
+            "name": "p_longitude",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "GPS longitude"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AugmentedCity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/series": {
+      "post": {
+        "tags": [
+          "Reconstruction"
+        ],
+        "summary": "Create reconstruction task",
+        "description": "Create a new task to reconstruct a series of images. The task passes to the status of waiting for image upload after creation. After receiving a signal that the images have been uploaded, the task is added to the queue for processing.",
+        "operationId": "createReconstructionTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanSeriesDescription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Series reconstruction task created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReconstructionTaskStatus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reconstruction"
+        ],
+        "summary": "Upload images for reconstruction",
+        "operationId": "updateReconstructionTask",
+        "description": "Upload images for reconstruction. You can upload one image or a group of images at a time. To send a signal that the upload is complete, call the method without image data. After receiving such a signal that images are being uploaded, the service adds the task to the queue and changes its status to IN_QUEUE. When the status is changed, new images cannot be uploaded.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "task_id",
+            "description": "Reconstruction task id. Only one task_id could be specified",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ReconstructionTaskId"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Image or images list. Call with no images data to finish uploading and start reconstruction",
+          "required": false,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "$ref": "#/components/schemas/ImageWithExif"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Images uploaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReconstructionTaskStatus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Reconstruction"
+        ],
+        "summary": "Get reconstruction task status",
+        "description": "Get series reconstruction task status by task id. Several task ids could be specified. Return status for known task ids. Return nothing for unknown task ids.",
+        "operationId": "getReconstructionStatus",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "task_id",
+            "required": true,
+            "description": "Task id",
+            "schema": {
+              "$ref": "#/components/schemas/ReconstructionTaskIds"
+            },
+            "style": "form",
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Series processing statuses list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReconstructionTaskStatus"
+                  },
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/object/pose": {
+      "post": {
+        "summary": "Add AR object by 3D pose",
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "addObjectByPose",
+        "description": "Add a custom object by 3d pose",
+        "responses": {
+          "200": {
+            "description": "Object processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddObjectResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjectWithPose"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/object": {
+      "post": {
+        "summary": "Add AR object by image",
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "addObjectByImage",
+        "description": "Add a custom object by marked image",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "description",
+                  "image"
+                ],
+                "properties": {
+                  "description": {
+                    "$ref": "#/components/schemas/ObjectWithMarkedImage"
+                  },
+                  "image": {
+                    "$ref": "#/components/schemas/ImageWithExif"
+                  }
+                }
+              },
+              "encoding": {
+                "description": {
+                  "contentType": "application/json"
+                },
+                "image": {
+                  "contentType": "image/jpeg"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Object processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddObjectResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/localizer/prepare": {
+      "get": {
+        "tags": [
+          "Localizer"
+        ],
+        "summary": "Prepare localization session",
+        "operationId": "prepare",
+        "description": "Prepare for localization for given geolocation. Causes server to load nearby reconstructions for localization. Returns an error when localization in this location is not possible.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "GPS latitude"
+          },
+          {
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "GPS longitude"
+          },
+          {
+            "in": "query",
+            "name": "alt",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "GPS altitude (optional)"
+          },
+          {
+            "in": "query",
+            "name": "dop",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "GPS HDOP (optional)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrepareResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/localizer/localize": {
+      "post": {
+        "tags": [
+          "Localizer"
+        ],
+        "summary": "Localize camera",
+        "operationId": "localize",
+        "description": "Localize uploaded image. Return camera pose and optional placeholders scene, surfaces scene and objects content. Camera, placeholders and surfaces coordinates are local coordinates in reconstruction coordinate system identified by reconstruction id.",
+        "responses": {
+          "200": {
+            "description": "Localization result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizationResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "description",
+                  "image"
+                ],
+                "properties": {
+                  "description": {
+                    "$ref": "#/components/schemas/ImageDescription"
+                  },
+                  "image": {
+                    "$ref": "#/components/schemas/Image"
+                  },
+                  "hint": {
+                    "$ref": "#/components/schemas/LocalizationHint"
+                  }
+                }
+              },
+              "encoding": {
+                "description": {
+                  "contentType": "application/json"
+                },
+                "image": {
+                  "contentType": "image/jpeg"
+                }
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageWithExif"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/server_version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Get server version",
+        "operationId": "getServerVersion",
+        "description": "Get server version",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "2.7-1-g926829c AC-178-add_versioning 2020.06.19 13:12"
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vector2d": {
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Vector2i": {
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "example": 100
+          },
+          "y": {
+            "type": "integer",
+            "example": 42
+          }
+        }
+      },
+      "Vector3d": {
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "z"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "z": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Quaternion": {
+        "type": "object",
+        "required": [
+          "w",
+          "x",
+          "y",
+          "z"
+        ],
+        "properties": {
+          "w": {
+            "type": "number",
+            "format": "float"
+          },
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "z": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Pose": {
+        "type": "object",
+        "required": [
+          "position",
+          "orientation"
+        ],
+        "properties": {
+          "position": {
+            "$ref": "#/components/schemas/Vector3d"
+          },
+          "orientation": {
+            "$ref": "#/components/schemas/Quaternion"
+          }
+        }
+      },
+      "GeoPosition": {
+        "type": "array",
+        "description": "Geo position in 3D space. A position is an array of numbers. There MUST be two or three elements. The first two elements are longitude and latitude, or easting and northing, precisely in that order and using decimal numbers. Altitude or elevation MAY be included as an optional third element.",
+        "externalDocs": {
+          "url": "https://tools.ietf.org/html/rfc7946#section-3.1.1"
+        },
+        "minItems": 2,
+        "maxItems": 3,
+        "items": {
+          "type": "number"
+        }
+      },
+      "GeoPoint": {
+        "type": "object",
+        "description": "Single geo position geometry type",
+        "externalDocs": {
+          "url": "https://tools.ietf.org/html/rfc7946#section-3.1.2"
+        },
+        "required": [
+          "type",
+          "coordinates"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Point"
+            ]
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/GeoPosition"
+          }
+        }
+      },
+      "Camera": {
+        "type": "object",
+        "required": [
+          "pose"
+        ],
+        "properties": {
+          "pose": {
+            "$ref": "#/components/schemas/Pose"
+          },
+          "intrinsics": {
+            "$ref": "#/components/schemas/CameraIntrinsics"
+          }
+        }
+      },
+      "PlaceholderNode3d": {
+        "type": "object",
+        "required": [
+          "placeholder_id",
+          "pose"
+        ],
+        "properties": {
+          "placeholder_id": {
+            "type": "string"
+          },
+          "pose": {
+            "$ref": "#/components/schemas/Pose"
+          },
+          "frame": {
+            "$ref": "#/components/schemas/Frame3d"
+          }
+        }
+      },
+      "Placeholders3d": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/PlaceholderNode3d"
+        },
+        "description": "Pose describes position and orientation in reconstruction coordinate system. Frame describes 4 points in placeholder coordinate system."
+      },
+      "Frame2d": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "$ref": "#/components/schemas/Vector2d"
+        }
+      },
+      "Frame3d": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "$ref": "#/components/schemas/Vector3d"
+        }
+      },
+      "Surface": {
+        "type": "object",
+        "required": [
+          "pose",
+          "frame"
+        ],
+        "properties": {
+          "pose": {
+            "$ref": "#/components/schemas/Pose"
+          },
+          "frame": {
+            "$ref": "#/components/schemas/Frame2d"
+          }
+        }
+      },
+      "Surfaces": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Surface"
+        }
+      },
+      "Placeholder": {
+        "type": "object",
+        "required": [
+          "placeholder_id"
+        ],
+        "properties": {
+          "placeholder_id": {
+            "type": "string"
+          }
+        }
+      },
+      "ARObject": {
+        "type": "object",
+        "required": [
+          "placeholder",
+          "sticker"
+        ],
+        "properties": {
+          "placeholder": {
+            "$ref": "#/components/schemas/Placeholder"
+          },
+          "sticker": {
+            "$ref": "#/components/schemas/Sticker"
+          }
+        }
+      },
+      "ARObjects": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ARObject"
+        }
+      },
+      "ObjectWithPose": {
+        "type": "object",
+        "required": [
+          "reconstruction_id",
+          "pose",
+          "description"
+        ],
+        "properties": {
+          "reconstruction_id": {
+            "type": "integer"
+          },
+          "pose": {
+            "$ref": "#/components/schemas/Pose"
+          },
+          "frame": {
+            "$ref": "#/components/schemas/Frame3d"
+          },
+          "description": {
+            "type": "object",
+            "required": [
+              "sticker"
+            ],
+            "properties": {
+              "sticker": {
+                "$ref": "#/components/schemas/StickerData"
+              }
+            }
+          }
+        }
+      },
+      "ObjectWithMarkedImage": {
+        "type": "object",
+        "required": [
+          "placeholder",
+          "sticker"
+        ],
+        "properties": {
+          "placeholder": {
+            "$ref": "#/components/schemas/PlaceholderImage"
+          },
+          "sticker": {
+            "$ref": "#/components/schemas/StickerData"
+          }
+        }
+      },
+      "PlaceholderImage": {
+        "type": "object",
+        "description": "Marked image",
+        "required": [
+          "projections"
+        ],
+        "properties": {
+          "projections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImageProjections"
+            }
+          }
+        }
+      },
+      "ImageProjections": {
+        "type": "object",
+        "required": [
+          "points",
+          "filename"
+        ],
+        "properties": {
+          "points": {
+            "$ref": "#/components/schemas/Frame2i"
+          },
+          "filename": {
+            "type": "string",
+            "example": "image.jpg"
+          }
+        }
+      },
+      "Frame2i": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "$ref": "#/components/schemas/Vector2i"
+        }
+      },
+      "DeleteObjectStatus": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "| State   | Code   |  Description  |\n  | -- | -- | -- |\n  | Success | 0 | The object was successfully deleted |\n  | Fail | 1 | Couldn't delete the object |\n\n"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Sticker": {
+        "type": "object",
+        "required": [
+          "sticker_id",
+          "sticker_text",
+          "sticker_type",
+          "path"
+        ],
+        "properties": {
+          "sticker_id": {
+            "type": "string"
+          },
+          "sticker_text": {
+            "type": "string"
+          },
+          "sticker_type": {
+            "type": "string"
+          },
+          "sticker_subtype": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "StickerData": {
+        "type": "object",
+        "required": [
+          "sticker_text",
+          "sticker_type",
+          "path"
+        ],
+        "properties": {
+          "sticker_text": {
+            "type": "string"
+          },
+          "sticker_type": {
+            "type": "string"
+          },
+          "sticker_subtype": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "PrepareStatus": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "| State   | Code   |  Description  |\n  | -- | -- | -- |\n  | Success | 0 | Server is loading nearby data |\n  | Fail | 1 | No nearby reconstructions to localize in |\n\n"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PrepareResult": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/PrepareStatus"
+          }
+        }
+      },
+      "LocalizationStatus": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "| State   | Code   |  Description  |\n  | -- | -- | -- |\n  | Success | 0 | Image is localized |\n  | Fail | 1 | Fail to localize image |\n\n"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "LocalizationResult": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "camera": {
+            "$ref": "#/components/schemas/Camera"
+          },
+          "reconstruction_id": {
+            "type": "integer"
+          },
+          "placeholders": {
+            "$ref": "#/components/schemas/Placeholders3d"
+          },
+          "surfaces": {
+            "$ref": "#/components/schemas/Surfaces"
+          },
+          "objects": {
+            "$ref": "#/components/schemas/ARObjects"
+          },
+          "status": {
+            "$ref": "#/components/schemas/LocalizationStatus"
+          }
+        }
+      },
+      "AddObjectStatus": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "| State   | Code   |  Description  |\n  | -- | -- | -- |\n  | Success | 0 | Object is added |\n  | Fail | 1 | Failed to add object |\n\n"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AddObjectResult": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "objects_info": {
+            "$ref": "#/components/schemas/ARObjects"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AddObjectStatus"
+          }
+        }
+      },
+      "LocalizationHint": {
+        "type": "object",
+        "required": [
+          "reconstructions"
+        ],
+        "properties": {
+          "reconstructions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "hint_only": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "List of reconstruction identifiers. The service will perform localization sequentially in each reconstruction according to the order specified in the list until the first successful result is obtained. If hint_only is true, the service will localize only in the specified reconstructions. If hint_only is false, the service will continue localization attempts in the nearest reconstructions"
+      },
+      "AugmentedCity": {
+        "type": "object",
+        "description": "Information about the augmented city. Includes name, country and geometry of the city.",
+        "required": [
+          "city_id",
+          "city",
+          "country",
+          "description"
+        ],
+        "properties": {
+          "city_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Numeric identifier of the city"
+          },
+          "city": {
+            "type": "string",
+            "description": "Name of the city",
+            "example": "Saint Petersburg"
+          },
+          "country": {
+            "type": "string",
+            "description": "Name of the country where the city is located",
+            "example": "Russia"
+          },
+          "description": {
+            "$ref": "#/components/schemas/AugmentedCityDescription"
+          }
+        }
+      },
+      "AugmentedCityDescription": {
+        "type": "object",
+        "description": "Additional city data",
+        "required": [
+          "circle"
+        ],
+        "properties": {
+          "circle": {
+            "type": "object",
+            "description": "City center and radius",
+            "required": [
+              "center",
+              "radius"
+            ],
+            "properties": {
+              "center": {
+                "$ref": "#/components/schemas/GeoPoint"
+              },
+              "radius": {
+                "type": "number",
+                "format": "float",
+                "description": "City radius in meters"
+              }
+            }
+          }
+        }
+      },
+      "AugmentedCities": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/AugmentedCity"
+        }
+      },
+      "Image": {
+        "type": "string",
+        "format": "binary",
+        "description": "A JPEG-encoded image"
+      },
+      "ImageDescription": {
+        "type": "object",
+        "required": [
+          "gps"
+        ],
+        "properties": {
+          "gps": {
+            "type": "object",
+            "required": [
+              "latitude",
+              "longitude"
+            ],
+            "properties": {
+              "latitude": {
+                "type": "number",
+                "format": "float",
+                "example": 25.000933
+              },
+              "longitude": {
+                "type": "number",
+                "format": "float",
+                "example": -70.999828
+              },
+              "altitude": {
+                "type": "number",
+                "format": "float",
+                "example": 7
+              },
+              "hdop": {
+                "type": "number",
+                "format": "float",
+                "example": 2
+              }
+            }
+          },
+          "intrinsics": {
+            "$ref": "#/components/schemas/CameraIntrinsics"
+          },
+          "focal_length_in_35mm_film": {
+            "type": "integer"
+          },
+          "mirrored": {
+            "type": "boolean",
+            "default": false
+          },
+          "rotation": {
+            "type": "integer",
+            "enum": [
+              0,
+              90,
+              180,
+              270
+            ],
+            "default": 0,
+            "description": "Clockwise camera rotation"
+          }
+        },
+        "description": "Describes gps position and camera parameters"
+      },
+      "CameraIntrinsics": {
+        "type": "object",
+        "required": [
+          "fx",
+          "fy",
+          "cx",
+          "cy"
+        ],
+        "properties": {
+          "fx": {
+            "type": "number",
+            "format": "float",
+            "description": "Focal length"
+          },
+          "fy": {
+            "type": "number",
+            "format": "float",
+            "description": "Focal length"
+          },
+          "cx": {
+            "type": "number",
+            "format": "float",
+            "description": "Principal point"
+          },
+          "cy": {
+            "type": "number",
+            "format": "float",
+            "description": "Principal point"
+          }
+        },
+        "description": "Intrinsics are based on physical characteristics of the device camera and a pinhole camera model."
+      },
+      "ImageWithExif": {
+        "type": "string",
+        "format": "binary",
+        "description": "A JPEG-encoded image, must include GPS data in EXIF tags"
+      },
+      "ReconstructionTaskId": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Series task id"
+      },
+      "ReconstructionTaskIds": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ReconstructionTaskId"
+        }
+      },
+      "ReconstructionStage": {
+        "type": "string",
+        "enum": [
+          "UPLOAD",
+          "IN_QUEUE",
+          "IN_PROCESS",
+          "DONE"
+        ],
+        "description": "| Stage  |  Description  |\n  | -- | -- |\n  | UPLOAD | Wait images upload |\n  | IN_QUEUE | Wait for processing |\n  | IN_PROCESS | Reconstruction in process |\n  | DONE | Processing is finished |\n\n"
+      },
+      "ReconstructionTaskStatus": {
+        "type": "object",
+        "required": [
+          "task_id",
+          "stage"
+        ],
+        "properties": {
+          "task_id": {
+            "$ref": "#/components/schemas/ReconstructionTaskId"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/ReconstructionStage"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "image.jpg"
+            },
+            "description": "List of uploaded images filenames"
+          }
+        },
+        "description": "Series reconstruction task process info"
+      },
+      "ScanSeriesDescription": {
+        "type": "object",
+        "required": [
+          "client",
+          "daytime",
+          "device",
+          "name",
+          "passages",
+          "user"
+        ],
+        "properties": {
+          "client": {
+            "type": "string",
+            "description": "Application name",
+            "example": "AC Scanner  version_name: 1.0 version_type: release"
+          },
+          "daytime": {
+            "$ref": "#/components/schemas/ScanDaytime"
+          },
+          "device": {
+            "type": "string",
+            "description": "Phone or camera model",
+            "example": "Mi MIX 3"
+          },
+          "name": {
+            "type": "string",
+            "description": "Location name",
+            "example": "Elm street"
+          },
+          "passages": {
+            "$ref": "#/components/schemas/ScanPassages"
+          },
+          "user": {
+            "type": "string",
+            "description": "User login or id",
+            "example": "user@mail.com"
+          }
+        }
+      },
+      "ScanDaytime": {
+        "type": "string",
+        "enum": [
+          "DAY",
+          "EVENING",
+          "NIGHT"
+        ],
+        "description": "| Time of day  |  Description  |\n  | -- | -- |\n  | DAY |    |\n  | EVENING |  |\n  | NIGHT |  |\n\n"
+      },
+      "ScanPassage": {
+        "type": "object",
+        "required": [
+          "style",
+          "points"
+        ],
+        "properties": {
+          "style": {
+            "$ref": "#/components/schemas/ScanStyle"
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScanPoint"
+            }
+          }
+        }
+      },
+      "ScanPassages": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ScanPassage"
+        }
+      },
+      "ScanPoint": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ScanFrame"
+        }
+      },
+      "ScanFrame": {
+        "type": "object",
+        "required": [
+          "filename"
+        ],
+        "properties": {
+          "filename": {
+            "type": "string",
+            "description": "Unique image filename",
+            "example": "image_1.jpg"
+          },
+          "camera": {
+            "$ref": "#/components/schemas/Camera"
+          }
+        }
+      },
+      "ScanStyle": {
+        "type": "string",
+        "enum": [
+          "LINEAR_AUTO",
+          "LINEAR_MANUAL",
+          "CIRCULAR_AUTO",
+          "CIRCULAR_MANUAL"
+        ],
+        "description": "| Scan style  |  Description  |\n  | -- | -- |\n  | LINEAR_AUTO |  |\n  | LINEAR_MANUAL |  |\n  | CIRCULAR_AUTO |  |\n  | CIRCULAR_MANUAL |  |\n\n"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "text/plain": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not Found",
+        "content": {
+          "text/plain": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "text/plain": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
