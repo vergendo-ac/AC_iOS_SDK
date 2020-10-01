@@ -1,4 +1,4 @@
-# Augmented City Demo
+# Augmented City SDK
 
 ## Demo gif
 //todo

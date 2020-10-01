@@ -11,7 +11,7 @@ import SwiftUI
 struct AC_demoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ARScreenView()
         }
     }
 }
