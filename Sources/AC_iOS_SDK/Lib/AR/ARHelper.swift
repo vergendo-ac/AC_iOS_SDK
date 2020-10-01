@@ -37,7 +37,7 @@ open class ARHelper {
         AR.Session.set(arView: backView)
     }
     
-    public static func takePhoto(completion: @escaping (Data?, AlertMessage?, UIDeviceOrientation?) -> Void) {
+    public static func takePhoto(completion: @escaping (Data?, NSError?, UIDeviceOrientation?) -> Void) {
         AR.Session.takePhoto(completion: completion)
     }
 
