@@ -107,6 +107,18 @@ open class SDK {
             NET.ObjectOperator.addObjectWithPose(server: address, objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
+        
+        public typealias addObjectByImageCompletionHandler = NET.ObjectOperator.addObjectWithPoseCompletionHandler
+        public static func addObjectByImage(server address: String = Servers.addresses[0], image: Data, description: NET.ObjectOperator.objectWithMarkedImage, apiResponseQueue: DispatchQueue = .main, location: CLLocation, completion: @escaping addObjectByImageCompletionHandler) {
+            
+            guard let imageURL = FileUtils.writeFile(name: "iosImageForLocalization", data: image) else {
+                completion(nil, NSError(domain: "ac.ios.sdk.error", code: 1, userInfo: ["error": "no image url"]))
+                return
+            }
+            
+            NET.ObjectOperator.addObjectByImage(server: address, description: description, image: imageURL, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+        
     }
     
     open class ARScene {
