@@ -6,8 +6,8 @@
         "repositoryURL": "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_AR.git",
         "state": {
           "branch": null,
-          "revision": "c970d85f6ffe881c4fcc26e7908d510bb196d3fb",
-          "version": "2.0.3"
+          "revision": "2f00d6d832b925d42289414597bb14d5fe0e5b16",
+          "version": "2.0.4"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_SDK.git",
         "state": {
           "branch": null,
-          "revision": "72cc3b59d38eec1afa130b400ba37d734cb23454",
-          "version": "2.0.6"
+          "revision": "4e89d945dddebc155662a15472d09e629afd43ea",
+          "version": "2.0.7"
         }
       },
       {

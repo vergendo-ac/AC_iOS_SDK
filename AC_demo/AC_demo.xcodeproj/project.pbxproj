@@ -403,7 +403,7 @@
 			repositoryURL = "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_SDK.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.6;
+				minimumVersion = 2.0.7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
