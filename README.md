@@ -1,7 +1,7 @@
 # Augmented City SDK
 
 ## Demo gif
-//todo
+![Demo image](doc/ac_ios_demo.gif?raw=true "Demo app")
 
 ## Introduction
 [Augmented City API](https://developer.augmented.city/doc)
