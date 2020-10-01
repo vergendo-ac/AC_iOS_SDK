@@ -11,13 +11,13 @@
 		048FE60D2525EA9100DAD4D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048FE60C2525EA9100DAD4D4 /* Assets.xcassets */; };
 		048FE6102525EA9100DAD4D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048FE60F2525EA9100DAD4D4 /* Preview Assets.xcassets */; };
 		048FE61A2525EBFD00DAD4D4 /* AC_iOS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 048FE6192525EBFD00DAD4D4 /* AC_iOS_SDK */; };
-		048FE61D2525EC3400DAD4D4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 048FE61C2525EC3400DAD4D4 /* README.md */; };
 		048FE6232525F01B00DAD4D4 /* ARCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE6222525F01B00DAD4D4 /* ARCameraView.swift */; };
 		048FE6282525F09100DAD4D4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE6272525F09100DAD4D4 /* LocationManager.swift */; };
 		048FE62F2525F10A00DAD4D4 /* ARScreenIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62C2525F10A00DAD4D4 /* ARScreenIntent.swift */; };
 		048FE6302525F10A00DAD4D4 /* ARScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62D2525F10A00DAD4D4 /* ARScreenView.swift */; };
 		048FE6312525F10A00DAD4D4 /* ARScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62E2525F10A00DAD4D4 /* ARScreenModel.swift */; };
 		048FE63D2525F90B00DAD4D4 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 048FE63C2525F90B00DAD4D4 /* art.scnassets */; };
+		048FE6442525FE9500DAD4D4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 048FE6432525FE9500DAD4D4 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,13 +26,13 @@
 		048FE60C2525EA9100DAD4D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		048FE60F2525EA9100DAD4D4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		048FE6112525EA9100DAD4D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		048FE61C2525EC3400DAD4D4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		048FE6222525F01B00DAD4D4 /* ARCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCameraView.swift; sourceTree = "<group>"; };
 		048FE6272525F09100DAD4D4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		048FE62C2525F10A00DAD4D4 /* ARScreenIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARScreenIntent.swift; sourceTree = "<group>"; };
 		048FE62D2525F10A00DAD4D4 /* ARScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARScreenView.swift; sourceTree = "<group>"; };
 		048FE62E2525F10A00DAD4D4 /* ARScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARScreenModel.swift; sourceTree = "<group>"; };
 		048FE63C2525F90B00DAD4D4 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		048FE6432525FE9500DAD4D4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,8 +50,8 @@
 		048FE5FC2525EA8F00DAD4D4 = {
 			isa = PBXGroup;
 			children = (
+				048FE6432525FE9500DAD4D4 /* README.md */,
 				048FE6202525EFEB00DAD4D4 /* Lib */,
-				048FE61C2525EC3400DAD4D4 /* README.md */,
 				048FE6072525EA8F00DAD4D4 /* AC_demo */,
 				048FE6062525EA8F00DAD4D4 /* Products */,
 			);
@@ -202,6 +202,7 @@
 			files = (
 				048FE6102525EA9100DAD4D4 /* Preview Assets.xcassets in Resources */,
 				048FE63D2525F90B00DAD4D4 /* art.scnassets in Resources */,
+				048FE6442525FE9500DAD4D4 /* README.md in Resources */,
 				048FE60D2525EA9100DAD4D4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,7 +215,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				048FE6232525F01B00DAD4D4 /* ARCameraView.swift in Sources */,
-				048FE61D2525EC3400DAD4D4 /* README.md in Sources */,
 				048FE6312525F10A00DAD4D4 /* ARScreenModel.swift in Sources */,
 				048FE62F2525F10A00DAD4D4 /* ARScreenIntent.swift in Sources */,
 				048FE6282525F09100DAD4D4 /* LocationManager.swift in Sources */,
