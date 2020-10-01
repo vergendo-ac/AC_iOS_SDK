@@ -10,7 +10,6 @@
 		048FE6092525EA8F00DAD4D4 /* AC_demoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE6082525EA8F00DAD4D4 /* AC_demoApp.swift */; };
 		048FE60D2525EA9100DAD4D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048FE60C2525EA9100DAD4D4 /* Assets.xcassets */; };
 		048FE6102525EA9100DAD4D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048FE60F2525EA9100DAD4D4 /* Preview Assets.xcassets */; };
-		048FE61A2525EBFD00DAD4D4 /* AC_iOS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 048FE6192525EBFD00DAD4D4 /* AC_iOS_SDK */; };
 		048FE6232525F01B00DAD4D4 /* ARCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE6222525F01B00DAD4D4 /* ARCameraView.swift */; };
 		048FE6282525F09100DAD4D4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE6272525F09100DAD4D4 /* LocationManager.swift */; };
 		048FE62F2525F10A00DAD4D4 /* ARScreenIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62C2525F10A00DAD4D4 /* ARScreenIntent.swift */; };
@@ -18,6 +17,7 @@
 		048FE6312525F10A00DAD4D4 /* ARScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62E2525F10A00DAD4D4 /* ARScreenModel.swift */; };
 		048FE63D2525F90B00DAD4D4 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 048FE63C2525F90B00DAD4D4 /* art.scnassets */; };
 		048FE6442525FE9500DAD4D4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 048FE6432525FE9500DAD4D4 /* README.md */; };
+		048FE6482526015000DAD4D4 /* AC_iOS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 048FE6472526015000DAD4D4 /* AC_iOS_SDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048FE61A2525EBFD00DAD4D4 /* AC_iOS_SDK in Frameworks */,
+				048FE6482526015000DAD4D4 /* AC_iOS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +154,7 @@
 			);
 			name = AC_demo;
 			packageProductDependencies = (
-				048FE6192525EBFD00DAD4D4 /* AC_iOS_SDK */,
+				048FE6472526015000DAD4D4 /* AC_iOS_SDK */,
 			);
 			productName = AC_demo;
 			productReference = 048FE6052525EA8F00DAD4D4 /* AC_demo.app */;
@@ -184,7 +184,7 @@
 			);
 			mainGroup = 048FE5FC2525EA8F00DAD4D4;
 			packageReferences = (
-				048FE6182525EBFD00DAD4D4 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */,
+				048FE6462526015000DAD4D4 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */,
 			);
 			productRefGroup = 048FE6062525EA8F00DAD4D4 /* Products */;
 			projectDirPath = "";
@@ -410,9 +410,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		048FE6182525EBFD00DAD4D4 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */ = {
+		048FE6462526015000DAD4D4 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://c61780862aeaec32b489d16bfd689fe12189c9eb@github.com/vergendo-ac/AC_iOS_SDK.git";
+			repositoryURL = "https://20e2ac490e89ceb2d1ed84043ad82762f831e9d6@github.com/vergendo-ac/AC_iOS_SDK.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.8;
@@ -421,9 +421,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		048FE6192525EBFD00DAD4D4 /* AC_iOS_SDK */ = {
+		048FE6472526015000DAD4D4 /* AC_iOS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 048FE6182525EBFD00DAD4D4 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */;
+			package = 048FE6462526015000DAD4D4 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */;
 			productName = AC_iOS_SDK;
 		};
 /* End XCSwiftPackageProductDependency section */
