@@ -1,7 +1,7 @@
 # Augmented City Demo
 
-## Demo
-![Demo image](doc/demo.gif?raw=true "Demo app")
+## Demo gif
+//todo
 
 ## Introduction
 [Augmented City API](https://developer.augmented.city/doc)
@@ -20,7 +20,7 @@ iOS version >= 13.0 & Swift 5 are recommended.
 
 ## Demo Project
 The Augmented City demo app demonstrates how to use AC api.
-[Augmented City API](/AC_demo)
+[Demo project](/AC_demo)
 
 ## License
 TBD
