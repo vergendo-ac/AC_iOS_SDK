@@ -36,5 +36,9 @@ open class ARHelper {
         ARHelper.serverAddress = address
         AR.Session.set(arView: backView)
     }
+    
+    public static func takePhoto(completion: @escaping (Data?, AlertMessage?, UIDeviceOrientation?) -> Void) {
+        AR.Session.takePhoto(completion: completion)
+    }
 
 }

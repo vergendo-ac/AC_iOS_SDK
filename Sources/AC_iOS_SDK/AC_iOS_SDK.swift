@@ -153,6 +153,10 @@ open class SDK {
         public static func stop() {
             ARHelper.stopAR()
         }
+        
+        public static func takePhoto(completion: @escaping (Data?, AlertMessage?, UIDeviceOrientation?) -> Void) {
+            ARHelper.takePhoto(completion: completion)
+        }
     }
     
 }
