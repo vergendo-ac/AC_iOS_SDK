@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,7 +17,6 @@
 		048FE6312525F10A00DAD4D4 /* ARScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE62E2525F10A00DAD4D4 /* ARScreenModel.swift */; };
 		048FE6442525FE9500DAD4D4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 048FE6432525FE9500DAD4D4 /* README.md */; };
 		04B3B81525270D6C000A2382 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B3B81425270D6C000A2382 /* art.scnassets */; };
-		04B3B81925271074000A2382 /* AC_iOS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3B81825271074000A2382 /* AC_iOS_SDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +39,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B3B81925271074000A2382 /* AC_iOS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +160,6 @@
 			);
 			name = AC_demo;
 			packageProductDependencies = (
-				04B3B81825271074000A2382 /* AC_iOS_SDK */,
 			);
 			productName = AC_demo;
 			productReference = 048FE6052525EA8F00DAD4D4 /* AC_demo.app */;
@@ -192,7 +189,6 @@
 			);
 			mainGroup = 048FE5FC2525EA8F00DAD4D4;
 			packageReferences = (
-				04B3B81725271074000A2382 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */,
 			);
 			productRefGroup = 048FE6062525EA8F00DAD4D4 /* Products */;
 			projectDirPath = "";
@@ -416,25 +412,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		04B3B81725271074000A2382 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://212aaa5f635b9aa75c95c1ec6dfb101ff4b52329@github.com/vergendo-ac/AC_iOS_SDK.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.12;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		04B3B81825271074000A2382 /* AC_iOS_SDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04B3B81725271074000A2382 /* XCRemoteSwiftPackageReference "AC_iOS_SDK" */;
-			productName = AC_iOS_SDK;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 048FE5FD2525EA8F00DAD4D4 /* Project object */;
 }
