@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "AC_iOS_AR",
-        "repositoryURL": "https://3e792ae99268670a52cbb4b0fc6712a900365cac@github.com/vergendo-ac/AC_iOS_AR.git",
+        "repositoryURL": "https://github.com/vergendo-ac/AC_iOS_AR.git",
         "state": {
           "branch": null,
           "revision": "584ac12eca74ccee0b651ceb08fe3c5d0972f35f",
@@ -12,7 +12,7 @@
       },
       {
         "package": "AC_iOS_NET",
-        "repositoryURL": "https://3e792ae99268670a52cbb4b0fc6712a900365cac@github.com/vergendo-ac/AC_iOS_NET.git",
+        "repositoryURL": "https://github.com/vergendo-ac/AC_iOS_NET.git",
         "state": {
           "branch": null,
           "revision": "a5e4e2ebf2e9b13a4f391baf869555c5e04e5b7a",
