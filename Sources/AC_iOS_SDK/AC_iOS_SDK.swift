@@ -133,8 +133,8 @@ open class SDK {
             }
         }
 
-        public static func setup(server address: String = Servers.addresses[0], arView backView: UIView) {
-            ARHelper.set(server: address, arView: backView)
+        public static func setup(server address: String = Servers.addresses[0], arView backView: UIView, stickerDelegate: StickerDelegate? = nil) {
+            ARHelper.set(server: address, arView: backView, stickerDelegate: stickerDelegate)
         }
         
         public static func start() {
@@ -157,6 +157,11 @@ open class SDK {
         public static func takePhoto(completion: @escaping (Data?, NSError?, UIDeviceOrientation?) -> Void) {
             ARHelper.takePhoto(completion: completion)
         }
+        
+        public static func delete(by stickerID: Int) {
+            ARHelper.delete(by: stickerID)
+        }
+
     }
     
 }

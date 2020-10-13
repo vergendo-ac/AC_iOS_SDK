@@ -32,13 +32,17 @@ open class ARHelper {
         AR.Session.show(localizationData: data)
     }
     
-    public class func set(server address: String, arView backView: UIView) {
+    public class func set(server address: String, arView backView: UIView, stickerDelegate: StickerDelegate?) {
         ARHelper.serverAddress = address
-        AR.Session.set(arView: backView)
+        AR.Session.set(arView: backView, stickerDelegate: stickerDelegate)
     }
     
     public static func takePhoto(completion: @escaping (Data?, NSError?, UIDeviceOrientation?) -> Void) {
         AR.Session.takePhoto(completion: completion)
+    }
+
+    public class func delete(by stickerID: Int) {
+        AR.Sticker.delete(stickerID: stickerID)
     }
 
 }
