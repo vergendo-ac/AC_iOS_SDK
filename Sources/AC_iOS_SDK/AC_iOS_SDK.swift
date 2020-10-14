@@ -89,6 +89,7 @@ open class SDK {
     
     open class Objects {
         
+        //MARK: Local API
         public typealias addObjectModel = NET.ObjectOperator.addObjectModel
         public typealias addObjectResponse = NET.ObjectOperator.addObjectResponse
         public typealias stickerField = NET.ObjectOperator.stickerField
@@ -102,6 +103,13 @@ open class SDK {
             NET.ObjectOperator.addObjectMPD(to: serverAddress, for: request, completion: completion)
         }
         
+        public typealias deleteObjectResponse = NET.ObjectOperator.deleteObjectResponse
+        public static func deleteObject(from serverAddress: String = Servers.addresses[2], stickerID: Int, completion: @escaping NET.ObjectOperator.deleteObjectCompletionHandler) {
+            let request = ObjectModel.DeleteObject.Request(stickerID: stickerID)
+            NET.ObjectOperator.deleteObject(from: serverAddress, by: request, completion: completion)
+        }
+
+        //MARK: Open API
         public typealias objectWithPose = AC_iOS_NET.ObjectWithPose
         public static func addObjectWithPose(server address: String = Servers.addresses[0], objectWithPose: SDK.Objects.objectWithPose, apiResponseQueue: DispatchQueue = .main, completion: @escaping NET.ObjectOperator.addObjectWithPoseCompletionHandler ) {
             NET.ObjectOperator.addObjectWithPose(server: address, objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
