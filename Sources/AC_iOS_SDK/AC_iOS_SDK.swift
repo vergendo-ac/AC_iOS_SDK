@@ -104,7 +104,7 @@ open class SDK {
         }
         
         public typealias deleteObjectResponse = NET.ObjectOperator.deleteObjectResponse
-        public static func deleteObject(from serverAddress: String = Servers.addresses[2], stickerID: Int, completion: @escaping NET.ObjectOperator.deleteObjectCompletionHandler) {
+        public static func deleteObject(from serverAddress: String = Servers.addresses[2], stickerID: String, completion: @escaping NET.ObjectOperator.deleteObjectCompletionHandler) {
             let request = ObjectModel.DeleteObject.Request(stickerID: stickerID)
             NET.ObjectOperator.deleteObject(from: serverAddress, by: request, completion: completion)
         }
