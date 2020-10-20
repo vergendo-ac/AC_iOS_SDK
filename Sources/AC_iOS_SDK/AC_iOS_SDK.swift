@@ -154,7 +154,7 @@ open class SDK {
                 guard error == nil else { completion(false, error); return }
                 guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
                 ARHelper.show(localizationResult: localizationResult)
-                completion(true, nil)
+                completion(localizationResult.status.code == ._0, nil)
             }
         }
 
