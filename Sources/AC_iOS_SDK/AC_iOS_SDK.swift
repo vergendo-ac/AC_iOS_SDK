@@ -169,7 +169,24 @@ open class SDK {
         public static func delete(by stickerID: Int) {
             ARHelper.delete(by: stickerID)
         }
-
+        
+        //MARK: Test
+        public static func showTest(_ imageData: Data?, _ location: CLLocation?, _ photoInfo: [String:Any]?, completion: @escaping (Bool, Error?) -> Void) {
+            SDK.ARScene.getLocalizationResultTest(imageData, location, photoInfo) { (_, mLocalizationResult, error, _) in
+                guard error == nil else { completion(false, error); return }
+                guard let localizationResult = mLocalizationResult else { completion(false, nil); return }
+                ARHelper.show(localizationResult: localizationResult)
+                completion(localizationResult.status.code == ._0, nil)
+            }
+        }
+        
+        public static func getLocalizationResultTest(_ mImageData: Data?, _ mLocation: CLLocation?, _ mPhotoInfo: [String:Any]?, completion: @escaping (Data?, SDK.Localization.localizationResultSwagger?, Error?, cameraPose?) -> Void) {
+            guard let imageData = mImageData, let currentLocation = mLocation, let photoInfo = mPhotoInfo else { completion(nil, nil, nil, nil); return }
+            SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationResult, mError) in
+                completion(imageData, mLocalizationResult, mError, nil)
+            }
+        }
+        
     }
     
 }
