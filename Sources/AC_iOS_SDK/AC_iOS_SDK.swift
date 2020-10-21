@@ -191,4 +191,16 @@ open class SDK {
         
     }
     
+    open class Reconstruction {
+        
+        public static func getAllCities(apiResponseQueue: DispatchQueue = .main, completion: @escaping (_ data: [AC_iOS_NET.AugmentedCity]?,_ error: Error?) -> Void) {
+            NET.ReconstructionOperator.getAllCities(apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+        
+        public static func getCityByGps(location: CLLocation, apiResponseQueue: DispatchQueue = .main, completion: @escaping (_ data: AC_iOS_NET.AugmentedCity?,_ error: Error?) -> Void) {
+            NET.ReconstructionOperator.getCityByGps(location: location, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+
+    }
+    
 }
