@@ -181,9 +181,11 @@ open class SDK {
         }
         
         public static func getLocalizationResultTest(_ mImageData: Data?, _ mLocation: CLLocation?, _ mPhotoInfo: [String:Any]?, completion: @escaping (Data?, SDK.Localization.localizationResultSwagger?, Error?, cameraPose?) -> Void) {
-            guard let imageData = mImageData, let currentLocation = mLocation, let photoInfo = mPhotoInfo else { completion(nil, nil, nil, nil); return }
-            SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationResult, mError) in
-                completion(imageData, mLocalizationResult, mError, nil)
+            ARHelper.getDataForLocalization { (_, _, _, _) in
+                guard let imageData = mImageData, let currentLocation = mLocation, let photoInfo = mPhotoInfo else { completion(nil, nil, nil, nil); return }
+                SDK.Localization.localizeSwagger(server: ARHelper.serverAddress, for: imageData, location: currentLocation, photoInfo: photoInfo) { (mLocalizationResult, mError) in
+                    completion(imageData, mLocalizationResult, mError, nil)
+                }
             }
         }
         
