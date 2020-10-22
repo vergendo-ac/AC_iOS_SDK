@@ -193,6 +193,8 @@ open class SDK {
     
     open class Reconstruction {
         
+        //TODO: convenient way!?
+        
         public static func getAllCities(apiResponseQueue: DispatchQueue = .main, completion: @escaping (_ data: [AC_iOS_NET.AugmentedCity]?,_ error: Error?) -> Void) {
             NET.ReconstructionOperator.getAllCities(apiResponseQueue: apiResponseQueue, completion: completion)
         }
