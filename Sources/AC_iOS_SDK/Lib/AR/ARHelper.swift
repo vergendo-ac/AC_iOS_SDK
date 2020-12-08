@@ -45,4 +45,7 @@ open class ARHelper {
         AR.Sticker.delete(stickerID: stickerID)
     }
 
+    public class func filter(by types: [String:Bool] = [:]) {
+        AR.Sticker.filter(by: types)
+    }
 }

@@ -183,6 +183,11 @@ open class SDK {
             }
         }
         
+        public static func filter(by types: [String:Bool] = [:]) {
+            ARHelper.filter(by: types)
+        }
+
+        
     }
     
     open class Reconstruction {
