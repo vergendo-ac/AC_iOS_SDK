@@ -37,6 +37,10 @@ open class ARHelper {
         AR.Session.set(arView: backView, stickerDelegate: stickerDelegate)
     }
     
+    public static func takePhoto(completion: @escaping (Data?, NSError?, UIDeviceOrientation?) -> Void) {
+        AR.Session.takePhoto(completion: completion)
+    }
+    
     public class func delete(by stickerID: Int) {
         AR.Sticker.delete(stickerID: stickerID)
     }

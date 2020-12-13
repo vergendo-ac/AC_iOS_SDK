@@ -156,6 +156,10 @@ open class SDK {
             ARHelper.stopAR()
         }
         
+        public static func takePhoto(completion: @escaping (Data?, NSError?, UIDeviceOrientation?) -> Void) {
+            ARHelper.takePhoto(completion: completion)
+        }
+        
         public static func delete(by stickerID: Int) {
             ARHelper.delete(by: stickerID)
         }
