@@ -23,9 +23,6 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "AC_iOS_SDK",
-            dependencies: ["AC_iOS_NET", "AC_iOS_AR"]),
-        .testTarget(
-            name: "AC_iOS_SDKTests",
-            dependencies: ["AC_iOS_SDK"]),
+            dependencies: ["AC_iOS_NET", "AC_iOS_AR"])
     ]
 )
